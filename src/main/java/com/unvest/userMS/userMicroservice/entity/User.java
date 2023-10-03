@@ -1,5 +1,8 @@
 package com.unvest.userMS.userMicroservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -28,15 +31,26 @@ public class User {
     @Length(min = 1, max = 10)
     private String passwordUser;
 
+    // JAAX Bidireccional (Elimina correcto, sirve la fk, ciclo finito, mala dirección)
+    @JsonManagedReference  // Antepone sobre Perfil la traída de data, rompe el ciclo
     @OneToOne(
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER
     )
     @JoinColumn(
-            name = "id_perfil",
+            name = "id_Perfil",
             referencedColumnName = "idPerfil"
     )
+    //@JsonIgnoreProperties(value="user")
     private Perfil perfil;
+
+    // Bidirectional (Elimina correctamente, Sirve pero no trae fk)
+    /*
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Perfil perfil;
+    */
+    // Unidirectional
+
 
     @OneToMany(
             cascade = CascadeType.ALL,

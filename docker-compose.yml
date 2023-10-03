@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+  java_app:
+    container_name: java_app
+    image: pee-java-app:1.0.0
+    build: .
+    ports:
+      - 6000:6000
+    environment:
+      - DATABASE_URL=jdbc:postgresql://java_db:5432/postgresv1
+      - DATABASE_USERNAME=postgres
+      - DATABASE_PASSWORD=password
+    depends_on:
+      - java_db
+  java_db:
+    container_name: java_db
+    image: postgres:16
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgresv1
+
+# Execute on path:
+#./mvnw clean package -DskipTests   ->   Para recompilar cualquier cambio, reescribirá la imagen
+#docker-compose build java_app  -> Construye la imagen que le indicamos en este mismo archivo
+#docker-compose up   ->  Sube todas las imágenes a contenedor. Se guía por este el orden indicado en este archivo
+#Instrucciones docker-compose: https://www.youtube.com/watch?v=uqBZEL9m2V4&t=41s
+
+#Para borrar y recrear la imagen-contenedor:
+#docker-compose down    ->   Detiene y elimina los contenedores
+#docker ps    -> Verificar qué contenedores tengo
+#docker images         ->   Verificar qué imágenes tengo
+#docker image rm  idImg1  idImg2 ....   -> Eliminar estas imágenes
+#Recrearlo todoo ...

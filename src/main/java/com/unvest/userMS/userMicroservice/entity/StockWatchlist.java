@@ -19,4 +19,6 @@ public class StockWatchlist {
             strategy = GenerationType.AUTO
     )
     private Long idStockWatchlist;
+
+    private String descriptionStock;
 }

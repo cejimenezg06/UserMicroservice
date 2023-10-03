@@ -18,4 +18,6 @@ public class NewWatchlist {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idNew;
 
+    private String descriptionNew;
+
 }

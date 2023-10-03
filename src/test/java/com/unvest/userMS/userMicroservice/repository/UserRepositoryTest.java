@@ -23,23 +23,33 @@ class UserRepositoryTest {
 
         Perfil perfil =
                 Perfil.builder()
-                        .namePerfil("My profile 1")
+                        .namePerfil("JJJJJ")
+                        .lastNamePerfil("AJJJJJJH")
+                        .emailPerfil("HHHJJ")
+                        .phonePerfil("3HHJ")
+                        .imagePerfil("img11HJJJJJJJJJ")
                         .build();
         StockWatchlist stockWatchlist1 =
                 StockWatchlist.builder()
+                        .descriptionStock("StJJJJJJJJJJ")
                         .build();
         StockWatchlist stockWatchlist2 =
                 StockWatchlist.builder()
+                        .descriptionStock("HJJJJJJJJJJJJJ")
                         .build();
         NewWatchlist newWatchlist1 =
-                NewWatchlist.builder().build();
+                NewWatchlist.builder()
+                        .descriptionNew("JJJJJJJJJ")
+                        .build();
         NewWatchlist newWatchlist2 =
-                NewWatchlist.builder().build();
+                NewWatchlist.builder()
+                        .descriptionNew("HJJJJJJJJJ")
+                        .build();
 
         User user =
                 User.builder()
-                        .nameUser("User3")
-                        .passwordUser("user3")
+                        .nameUser("JJJJ")
+                        .passwordUser("JJJJJ")
                         .perfil(perfil)
                         .stockWatchlistList(List.of(stockWatchlist1, stockWatchlist2))
                         .newWatchlistsList(List.of(newWatchlist1, newWatchlist2))
