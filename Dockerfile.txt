@@ -1,0 +1,7 @@
+Build the Docker Image
+
+RUN "docker build -t user_ms ."
+
+Run the Docker Container
+
+RUN "docker run --name user_ms --network mynetwork  -d -p 6000:6000 user_ms"

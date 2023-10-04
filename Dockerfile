@@ -1,14 +1,28 @@
-#FROM ubuntu:latest
-#LABEL authors="USER"
+# Stage 1: Build the Spring Boot application
+FROM maven:3.9.2-amazoncorretto-17 AS builder
 
-#ENTRYPOINT ["top", "-b"]
-#-----------------------------------
-#FROM openjdk:17
-#VOLUME /tmp
-#EXPOSE 6500
-#ADD ./target/userMicroservice-0.0.1-SNAPSHOT.jar app.jar
-#ENTRYPOINT ["java", "-jar", "/app.jar"]
+# Set the working directory within the container
+WORKDIR /app
 
+# Copy the Maven project file and download dependencies
+COPY pom.xml .
+RUN mvn dependency:go-offline
+
+# Copy the source code and build the application
+COPY src ./src
+RUN mvn package -DskipTests
+
+# Stage 2: Create the final Docker image
 FROM openjdk:17-jdk-alpine
-COPY target/userMicroservice-0.0.1-SNAPSHOT.jar userMicroserviceApp.jar
-ENTRYPOINT ["java", "-jar", "/userMicroserviceApp.jar"]
+
+# Set the working directory within the container
+WORKDIR /app
+
+# Copy the JAR file from the builder stage
+COPY --from=builder /app/target/*.jar app.jar
+
+# Expose port 6000 (or your desired port)
+EXPOSE 6000
+
+# Define the command to run the Spring Boot application
+CMD ["java", "-jar", "app.jar", "--server.port=6000"]
