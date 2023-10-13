@@ -47,7 +47,12 @@ public class AuthController {
 
     @GetMapping("/getID")
     public ResponseEntity<String> getID(@RequestParam("token") String token) {
-        String ID = jwtUtil.extractUsername(token);
-        return ResponseEntity.ok(ID);
+
+        String username = jwtUtil.extractUsername(token);
+
+        Optional<User> userEntity = userService.findByName(username);
+
+        return userEntity.map(user -> ResponseEntity.ok(user.getIdUser().toString())).orElseGet(() -> ResponseEntity.notFound().build());
+
     }
 }
