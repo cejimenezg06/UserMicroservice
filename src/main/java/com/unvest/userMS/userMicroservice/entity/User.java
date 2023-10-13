@@ -31,6 +31,11 @@ public class User {
     @Length(min = 1, max = 10)
     private String passwordUser;
 
+    @NotBlank(message = "Please, you must fill this field")
+    private String roleUser;
+
+    private boolean activeUser;
+
     // JAAX Bidireccional (Elimina correcto, sirve la fk, ciclo finito, mala dirección)
     @JsonManagedReference  // Antepone sobre Perfil la traída de data, rompe el ciclo
     @OneToOne(

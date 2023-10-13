@@ -31,13 +31,23 @@ public class AuthController {
             return ResponseEntity.badRequest().build();
         }
 
-        String token = jwtUtil.generateToken(user.getNameUser());
+        String token = jwtUtil.generateToken(user.getNameUser(), userOriginal.get().getRoleUser());
         return ResponseEntity.ok(token);
     }
 
     @GetMapping("/validate")
-    public ResponseEntity<Boolean> validateToken(@RequestParam("token") String token) {
+    public ResponseEntity<Object []> validateToken(@RequestParam("token") String token) {
         boolean isValid = jwtUtil.validateToken(token);
-        return ResponseEntity.ok(isValid);
+        String role = jwtUtil.extractRole(token);
+        Object [] response = new Object[2];
+        response[0] = isValid;
+        response[1] = role;
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/getID")
+    public ResponseEntity<String> getID(@RequestParam("token") String token) {
+        String ID = jwtUtil.extractUsername(token);
+        return ResponseEntity.ok(ID);
     }
 }
