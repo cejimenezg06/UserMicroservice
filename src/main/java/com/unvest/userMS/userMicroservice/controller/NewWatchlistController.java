@@ -13,27 +13,27 @@ public class NewWatchlistController {
     @Autowired
     private NewWatchlistService newWatchlistService;
 
-    @GetMapping("/newWatchlists")
+    @GetMapping("/newsWatchlists")
     public List<NewWatchlist> findAllNewWatchlists() {
         return newWatchlistService.findAllNewWatchlist();
     }
 
-    @GetMapping("/newWatchlists/{id}")
+    @GetMapping("/newsWatchlists/{id}")
     public NewWatchlist findNewWatchlistById(@PathVariable Long id) {
         return newWatchlistService.findNewWatchlistById(id);
     }
 
-    @PostMapping("/saveNewWatchlist")
+    @PostMapping("/saveNewsWatchlist")
     public NewWatchlist saveNewWatchlist(@RequestBody NewWatchlist newWatchlist) {
         return newWatchlistService.saveNewWatchlist(newWatchlist);
     }
 
-    @PutMapping("/updateNewWatchlist/{id}")
+    @PutMapping("/updateNewsWatchlist/{id}")
     public NewWatchlist updateNewWatchlist(@PathVariable Long id, @RequestBody NewWatchlist newWatchlist) {
         return newWatchlistService.updateNewWatchlist(id, newWatchlist);
     }
 
-    @DeleteMapping("/deleteNewWatchlist/{id}")
+    @DeleteMapping("/deleteNewsWatchlist/{id}")
     public void deleteNewWatchList(@PathVariable Long id) {
         newWatchlistService.deleteNewWatchlist(id);
     }

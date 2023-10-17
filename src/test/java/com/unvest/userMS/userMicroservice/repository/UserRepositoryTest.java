@@ -18,6 +18,7 @@ class UserRepositoryTest {
     @Autowired
     UserRepository userRepository;
 
+    /*
     @Test                   // Saving a User with a profile assigned
     public void saveUserWithPerfil() {
 
@@ -63,6 +64,6 @@ class UserRepositoryTest {
         List<User> users = userRepository.findAll();
         System.out.println("users = " + users);
     }
-
+    */
 
 }

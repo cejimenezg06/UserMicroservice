@@ -20,5 +20,5 @@ public class StockWatchlist {
     )
     private Long idStockWatchlist;
 
-    private String descriptionStock;
+    private Long id_Stock;
 }
